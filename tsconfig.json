@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "allowJs": false,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "declaration": true,
+    "noEmitOnError": true,
+    "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": ["es5", "es6", "es7"],
+    "module": "es6",
+    "target": "es5",
+    "moduleResolution": "node",
+    "typeRoots": [
+        "node_modules/@types",
+        "types"
+    ],
+    "baseUrl": ".",
+    "paths": {
+        "@/*": ["src/ts/*"]
+    }
+  }
+}
