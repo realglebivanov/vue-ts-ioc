@@ -1,12 +1,11 @@
-import { Configuration } from './configuration';
+import { Application } from '@/plugin';
 import { Provider } from './provider';
-import { Container } from 'ts-ioc-di';
 
 export class Bootstrapper {
     private providers: Array<Provider>;
 
-    public constructor(configuration: Configuration, container: Container) {
-        this.providers = configuration.getProviders(container);
+    public constructor(application: Application) {
+        this.providers = application.$iocConfig.getProviders(application);
     }
 
     public bootstrap(): void {

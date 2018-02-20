@@ -4,8 +4,8 @@ import { Configuration } from '@/providers/configuration';
 
 declare module 'vue/types/options' {
     interface ComponentOptions<V extends Vue> {
-        iocConfig: Configuration;
-        container: Container;
+        iocConfig?: Configuration;
+        container?: Container;
     }
 }
 

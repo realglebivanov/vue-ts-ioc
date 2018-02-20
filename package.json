@@ -1,12 +1,13 @@
 {
   "name": "vue-ts-ioc",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "VueJS bindings for IoC container and DI",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
     "build": "cross-env NODE_ENV='production' npm run webpack",
     "dev": "cross-env NODE_ENV='development' npm run webpack",
+    "test": "cross-env NODE_ENV='test' npm run webpack",
     "webpack": "node node_modules/webpack/bin/webpack.js --progress --config=./webpack"
   },
   "keywords": [
@@ -19,18 +20,26 @@
   "author": "Gleb Ivanov<realglebivanov@gmail.com>",
   "license": "ISC",
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
+    "@types/chai": "^4.1.2",
+    "@types/mocha": "^2.2.48",
+    "chai": "^4.1.2",
     "cross-env": "^5.1.3",
+    "istanbul": "^0.4.5",
+    "mocha": "^5.0.1",
+    "remap-istanbul": "^0.10.1",
     "ts-loader": "^3.5.0",
     "ts-webpack-config": "0.0.1",
     "tslint": "^5.9.1",
     "tslint-loader": "^3.5.3",
     "typescript": "^2.7.2",
     "webpack": "^3.11.0",
-    "webpack-merge": "^4.1.1"
+    "webpack-merge": "^4.1.1",
+    "webpack-mocha-plugin": "^0.2.1",
+    "webpack-node-externals": "^1.6.0"
   },
   "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
     "ts-ioc-di": "0.0.2",
     "vue": "^2.5.13",
     "vue-class-component": "^6.2.0"

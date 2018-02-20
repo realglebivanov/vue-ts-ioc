@@ -1,5 +1,5 @@
-export { Inject, Injectable, Container } from 'ts-ioc-di';
+import './vue';
+
 export { Plugin, Application } from './plugin';
 export { Provider, Configuration } from './providers';
-
-import './vue';
+export { Container, Inject, Injectable, InjectArgs } from 'ts-ioc-di';

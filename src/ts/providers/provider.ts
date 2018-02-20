@@ -1,8 +1,8 @@
-import { Container } from 'ts-ioc-di';
+import { Application } from '@/plugin';
 
 export abstract class Provider {
     public constructor(
-        protected container: Container
+        protected app: Application
     ) { }
 
     public boot(): void {

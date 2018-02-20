@@ -1,6 +1,6 @@
+import { Application } from '@/plugin';
 import { Constructor } from './constructor';
 import { Provider } from './provider';
-import { Container } from 'ts-ioc-di';
 
 export class Configuration {
     public constructor(
@@ -11,9 +11,9 @@ export class Configuration {
         this.providerClasses = providerClasses;
     }
 
-    public getProviders(container: Container): Array<Provider> {
+    public getProviders(application: Application): Array<Provider> {
         return this.providerClasses.map(
-            (constructor: Constructor) => new constructor(container)
+            (constructor: Constructor) => new constructor(application)
         );
     }
 }

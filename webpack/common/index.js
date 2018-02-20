@@ -18,6 +18,12 @@ module.exports = (paths) => ({
         alias: { '@': paths.ts.srcDir }
     },
 
+    externals: [
+        'vue',
+        'vue-class-component',
+        'ts-ioc-di'
+    ],
+
     module: {
       rules: [{
           test: /\.ts$/,

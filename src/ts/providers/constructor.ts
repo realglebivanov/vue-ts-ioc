@@ -1,6 +1,7 @@
 import { Container } from 'ts-ioc-di';
+import { Application } from '@/plugin';
 import { Provider } from './provider';
 
 export interface Constructor {
-    new(container: Container): Provider;
+    new(application: Application): Provider;
 }
