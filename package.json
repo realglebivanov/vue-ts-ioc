@@ -1,6 +1,6 @@
 {
   "name": "vue-ts-ioc",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "VueJS bindings for IoC container and DI",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -40,7 +40,7 @@
   "dependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
-    "ts-ioc-di": "0.0.3",
+    "ts-ioc-di": "0.0.4",
     "vue": "^2.5.13",
     "vue-class-component": "^6.2.0"
   }
