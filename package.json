@@ -40,7 +40,7 @@
   "dependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
-    "ts-ioc-di": "0.0.4",
+    "ts-ioc-di": "0.0.5",
     "vue": "^2.5.13",
     "vue-class-component": "^6.2.0"
   }
