@@ -67,8 +67,6 @@ const config = new Configuration([
   ServiceProvider
 ]);
 
-// bind things to container
-
 new Application({
  // Vue componentOptions here,
  iocConfig: config
@@ -76,9 +74,9 @@ new Application({
 ```
 
 ## Finally, usage of DI
+All [features](https://github.com/glebivanov816/ts-ioc-di) are available
 ```
 // Somewhere in one of your components
-// All [features](https://github.com/glebivanov816/ts-ioc-di) are available
 import { Service } from 'somewhere';
 import { Inject, InjectArgs } from 'vue-ts-ioc';
 
