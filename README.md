@@ -80,6 +80,9 @@ All [features](https://github.com/glebivanov816/ts-ioc-di) are available
 import { Service } from 'somewhere';
 import { Inject, InjectArgs } from 'vue-ts-ioc';
 
+import Component from 'vue-class-component';
+
+@Component
 class TestComponent extends Vue {
   @Inject()
   private service?: Service;
@@ -91,3 +94,6 @@ class TestComponent extends Vue {
 }
 
 ```
+## Pitfalls
+- You should not try to instantiate Vue components with container
+They are instantiated by VueJS internally and constructor injection is not possible here.
