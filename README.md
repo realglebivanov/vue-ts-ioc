@@ -1,6 +1,14 @@
 # vue-ts-ioc
 VueJS bindings for IoC container and DI
 
+## About
+I'll publish the package after [this](https://github.com/vuejs/vue-class-component/pull/227) pull-request is merged. 
+
+## Dependencies
+- vue
+- vue-class-component
+- ts-ioc-di
+
 ## Simple setup
 ```
 import Vue from 'vue';
@@ -68,6 +76,7 @@ new Application({
 ```
 
 ## Finally, usage of DI
+```
 // Somewhere in one of your components
 // All [features](https://github.com/glebivanov816/ts-ioc-di) are available
 import { Service } from 'somewhere';
