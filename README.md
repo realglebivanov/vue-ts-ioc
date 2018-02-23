@@ -2,7 +2,7 @@
 VueJS bindings for IoC container and DI
 
 ## About
-I'll publish the package after [this](https://github.com/vuejs/vue-class-component/pull/227) pull-request is merged. 
+I'll publish the package after [this](https://github.com/vuejs/vue-class-component/pull/227) pull-request is merged.
 
 ## Dependencies
 - vue
@@ -20,6 +20,10 @@ new Application({
  // Vue componentOptions here
 });
 ```
+
+If you don't want to instantiate `Application` from package, you can use it as mixin in your root component.
+There is only `beforeCreate` hook in it.
+
 ## Setup with manually instantiated container
 ```
 import Vue from 'vue';
@@ -39,7 +43,7 @@ new Application({
 });
 ```
 ## Fully configured setup
-Idea of Service Providers is the same as in [Laravel](https://laravel.com/). 
+Idea of Service Providers is the same as in [Laravel](https://laravel.com/).
 They are used to bind dependencies to container in two phases - registration and booting.
 In first phase you should not resolve any dependencies from container since they may have not been registered.
 In second phase you can resolve those dependencies and register another dependencies using them.
@@ -55,7 +59,7 @@ class ServiceProvider extends Provider {
   public register(): void {
     this.app.$container.singleton(Service);
   }
-  
+
   public boot(): void {
     this.app.$container.resolve(AnotherService);
   }
@@ -86,13 +90,12 @@ import Component from 'vue-class-component';
 class TestComponent extends Vue {
   @Inject()
   private service?: Service;
-  
+
   @InjectArgs()
   public beforeCreate(service: Service): void {
     // service is injected
   }
 }
-
 ```
 ## Pitfalls
 - You should not try to instantiate Vue components with container
