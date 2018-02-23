@@ -1,51 +1,57 @@
 const { LoaderOptionsPlugin } = require('webpack');
+const WebpackTypingsAliasesPlugin = require('webpack-typings-aliases-plugin');
 
-module.exports = (paths) => ({
-    context: paths.ts.srcDir,
-    entry: { index: './index' },
+module.exports = (paths) => {
+    const aliases = { '@': paths.ts.srcDir };
 
-    output: {
-        path: paths.ts.buildDir,
-        publicPath: paths.ts.buildPath,
-        filename: '[name].js',
-        libraryTarget: 'umd',
-        umdNamedDefine: true
-    },
+    return {
+        context: paths.ts.srcDir,
+        entry: { index: './index' },
 
-    resolve: {
-        modules: ['node_modules'],
-        extensions: ['.ts', '.js'],
-        alias: { '@': paths.ts.srcDir }
-    },
+        output: {
+            path: paths.ts.buildDir,
+            publicPath: paths.ts.buildPath,
+            filename: '[name].js',
+            libraryTarget: 'umd',
+            umdNamedDefine: true
+        },
 
-    externals: [
-        'vue',
-        'vue-class-component',
-        'ts-ioc-di'
-    ],
+        resolve: {
+            modules: ['node_modules'],
+            extensions: ['.ts', '.js'],
+            alias: aliases
+        },
 
-    module: {
-      rules: [{
-          test: /\.ts$/,
-          enforce: 'pre',
-          loader: 'tslint-loader',
-          include: [paths.ts.srcDir]
-      }, {
-          test: [/\.ts$/],
-          loader: 'ts-loader',
-          include: [paths.ts.srcDir]
-      }, {
-          test: [/\.js$/],
-          loader: 'babel-loader',
-          include: [paths.root('node_modules')]
-      }]
-    },
+        externals: [
+            'vue',
+            'vue-class-component',
+            'ts-ioc-di'
+        ],
 
-    plugins: [
-      new LoaderOptionsPlugin({
-          options: {
-            tslint: {emitErrors: true, failOnHint: true, typeCheck: true, project: true}
-          }
-      })
-    ]
-});
+        module: {
+          rules: [{
+              test: /\.ts$/,
+              enforce: 'pre',
+              loader: 'tslint-loader',
+              include: [paths.ts.srcDir]
+          }, {
+              test: [/\.ts$/],
+              loader: 'ts-loader',
+              include: [paths.ts.srcDir]
+          }]
+        },
+
+        plugins: [
+          new WebpackTypingsAliasesPlugin({
+            aliases: aliases,
+            srcDir: paths.ts.srcDir,
+            buildDir: paths.ts.buildDir
+          }),
+          new LoaderOptionsPlugin({
+              options: {
+                tslint: {emitErrors: true, failOnHint: true, typeCheck: true, project: true}
+              }
+          })
+        ]
+    };
+};

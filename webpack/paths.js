@@ -9,5 +9,10 @@ module.exports = {
         specDir: resolve('spec', 'ts')
     },
 
+    spec: {
+        srcDir: resolve('spec', 'ts'),
+        buildDir: resolve('.tmp', 'spec'),
+    },
+
     root: (path) => resolve(path)
 };

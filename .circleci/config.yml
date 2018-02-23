@@ -1,0 +1,10 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:9-stretch
+    working_directory: ~/vue-ts-ioc
+    steps:
+      - checkout
+      - run: npm i
+      - run: npm test
