@@ -2,7 +2,7 @@
 VueJS bindings for IoC container and DI
 
 ## About
-I'll publish the package after [this](https://github.com/vuejs/vue-class-component/pull/227) pull-request is merged.
+I'll publish the package after [this](https://github.com/vuejs/vue-class-component/pull/227) pull-request has been merged.
 
 ## Dependencies
 - vue
