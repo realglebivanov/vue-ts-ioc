@@ -11,9 +11,9 @@ export class Configuration {
         this.providerClasses = providerClasses;
     }
 
-    public getProviders(application: Application): Array<Provider> {
+    public getProviders(app: Application): Array<Provider> {
         return this.providerClasses.map(
-            (constructor: Constructor) => new constructor(application)
+            (constructor: Constructor) => new constructor(app)
         );
     }
 }

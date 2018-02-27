@@ -4,8 +4,8 @@ import { Provider } from './provider';
 export class Bootstrapper {
     private providers: Array<Provider>;
 
-    public constructor(application: Application) {
-        this.providers = application.$iocConfig.getProviders(application);
+    public constructor(app: Application) {
+        this.providers = app.$iocConfig.getProviders(app);
     }
 
     public bootstrap(): void {

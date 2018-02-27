@@ -19,6 +19,7 @@
     "IoC"
   ],
   "author": "Gleb Ivanov<realglebivanov@gmail.com>",
+  "repository": "github:glebivanov816/vue-ts-ioc",
   "license": "ISC",
   "devDependencies": {
     "@types/chai": "^4.1.2",
@@ -33,7 +34,7 @@
     "typescript": "^2.7.2",
     "webpack": "^3.11.0",
     "webpack-merge": "^4.1.1",
-    "webpack-typings-aliases-plugin": "0.0.2"
+    "webpack-typings-aliases-plugin": "0.0.5"
   },
   "dependencies": {
     "ts-ioc-di": "0.0.8",

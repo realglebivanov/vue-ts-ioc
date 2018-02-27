@@ -15,4 +15,9 @@ export class FixtureComponent extends Vue {
     public beforeCreate(dep2: FixtureClass): void {
         this.dep2 = dep2;
     }
+
+    @InjectArgs()
+    public created(dep2: FixtureClass): void {
+        this.dep2 = dep2;
+    }
 }
