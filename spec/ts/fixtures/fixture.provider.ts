@@ -1,8 +1,13 @@
 import { Provider } from '@/index';
 import { FixtureClass } from './fixture.class';
+import { Container } from 'ts-ioc-di';
 
-export class FixtureProvider extends Provider {
-    public register(): void {
-        this.app.$container.singleton(FixtureClass);
+export class FixtureProvider implements Provider {
+    public register(container: Container): void {
+        container.singleton(FixtureClass);
+    }
+
+    public boot(container: Container): void {
+
     }
 }

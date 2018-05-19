@@ -1,13 +1,17 @@
-import Vue, { VueConstructor } from 'vue';
+import Vue from 'vue';
 import Component from 'vue-class-component';
 
-import { ClassBuilderFactory } from 'ts-ioc-di';
+import { Configuration } from '@/providers';
+import { Container } from 'ts-ioc-di';
 
 @Component
 export class DIMixin extends Vue {
-    public beforeCreate(): void {
-        const constructor = this.constructor as VueConstructor;
-        const classBuilder = ClassBuilderFactory.create(constructor, this.$container);
-        classBuilder.setProduct(this).injectProperties().injectMethods();
-    }
+  public beforeCreate(): void {
+    this.$container = this.$options.container
+      || this.$options.parent && this.$options.parent.$container
+      || new Container();
+    this.$iocConfig = this.$options.iocConfig
+      || this.$options.parent && this.$options.parent.$iocConfig
+      || new Configuration();
+  }
 }

@@ -1,10 +1,12 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import { Bootstrapper } from '@/providers';
+import { Provider } from '@/providers';
 
 @Component
 export class Application extends Vue {
-    public beforeCreate(): void {
-        new Bootstrapper(this).bootstrap();
-    }
+  public beforeCreate(): void {
+    const providers = this.$iocConfig.getProviders();
+    providers.forEach((provider: Provider) => provider.register(this.$container));
+    providers.forEach((provider: Provider) => provider.boot(this.$container));
+  }
 }

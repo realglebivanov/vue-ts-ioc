@@ -1,35 +1,47 @@
 # vue-ts-ioc
 VueJS bindings for IoC container and DI
 
-## About
-I'll publish the package after [this](https://github.com/vuejs/vue-class-component/pull/227) pull-request has been merged.
-
 ## Dependencies
 - vue
 - vue-class-component
 - ts-ioc-di
+
+## Note
+Version from [github](https://github.com/glebivanov816/vue-class-component/tree/reflect-metadata-support-public) of `vue-class-component` is being used here, 'cause `vue-class-component` [doesnt support metadata forwarding](https://github.com/vuejs/vue-class-component/pull/227) which is required for this feature to work properly.
 
 ## Simple setup
 ```
 import Vue from 'vue';
 import { Application, Plugin } from 'vue-ts-ioc';
 
-Vue.use(new Plugin());
+Vue.use(Plugin);
 
 new Application({
  // Vue componentOptions here
 });
 ```
 
-If you don't want to instantiate `Application` from package, you can use it as mixin in your root component.
+If you don't want to instantiate `Application` from package, you can use it as a mixin in your root component.
 There is only `beforeCreate` hook in it.
+
+```
+import Vue from 'vue';
+import { Application, Plugin } from 'vue-ts-ioc';
+
+Vue.use(Plugin);
+
+new Vue({
+  mixins: [Application]
+ // Vue componentOptions here
+});
+```
 
 ## Setup with manually instantiated container
 ```
 import Vue from 'vue';
 import { Application, Plugin, Container } from 'vue-ts-ioc';
 
-Vue.use(new Plugin());
+Vue.use(Plugin);
 
 // ...
 
@@ -51,41 +63,39 @@ In second phase you can resolve those dependencies and register another dependen
 import Vue from 'vue';
 import { Application, Plugin, Configuration, Provider } from 'vue-ts-ioc';
 
-Vue.use(new Plugin());
+Vue.use(Plugin);
 
 // ...
 
-class ServiceProvider extends Provider {
-  public register(): void {
-    this.app.$container.singleton(Service);
+class ServiceProvider implements Provider {
+  public register(container: Container): void {
+    container.singleton(Service);
   }
 
-  public boot(): void {
-    this.app.$container.resolve(AnotherService);
+  public boot(container: Container): void {
+    container.resolve(AnotherService);
   }
 }
 
 // ...
 
-const config = new Configuration([
-  ServiceProvider
-]);
-
 new Application({
  // Vue componentOptions here,
- iocConfig: config
+ iocConfig: new Configuration(ServiceProvider)
 });
 ```
 
 ## Finally, usage of DI
-All [features](https://github.com/glebivanov816/ts-ioc-di) are available
+All [features](https://github.com/glebivanov816/ts-ioc-di) are available. 
+Your components should be `Autowired` classes for DI to work here.
 ```
 // Somewhere in one of your components
 import { Service } from 'somewhere';
-import { Inject, InjectArgs } from 'vue-ts-ioc';
+import { Inject, InjectArgs, Autowired } from 'vue-ts-ioc';
 
 import Component from 'vue-class-component';
 
+@Autowired()
 @Component
 class TestComponent extends Vue {
   @Inject()
@@ -97,6 +107,3 @@ class TestComponent extends Vue {
   }
 }
 ```
-## Pitfalls
-- You should not try to instantiate Vue components with container
-They are instantiated by VueJS internally and constructor injection is not possible here.

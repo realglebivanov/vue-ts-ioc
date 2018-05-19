@@ -1,19 +1,18 @@
-import { Application } from '@/plugin';
 import { Constructor } from './constructor';
 import { Provider } from './provider';
 
 export class Configuration {
-    public constructor(
-        private providerClasses: Array<Constructor> = []
-    ) { }
+  private providerClasses: Array<Constructor>;
 
-    public setProviderClasses(providerClasses: Array<Constructor>): void {
-        this.providerClasses = providerClasses;
-    }
+  public constructor(...providerClasses: Array<Constructor>) {
+    this.providerClasses = providerClasses;
+  }
 
-    public getProviders(app: Application): Array<Provider> {
-        return this.providerClasses.map(
-            (constructor: Constructor) => new constructor(app)
-        );
-    }
+  public setProviderClasses(providerClasses: Array<Constructor>): void {
+    this.providerClasses = providerClasses;
+  }
+
+  public getProviders(): Array<Provider> {
+    return this.providerClasses.map((ctor: Constructor) => new ctor);
+  }
 }

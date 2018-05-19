@@ -1,4 +1,4 @@
-import { Injectable, Inject, InjectArgs } from '@/index';
+import { Injectable, Inject } from '@/index';
 import { FixtureDependency } from './fixture.dependency';
 
 @Injectable
@@ -9,9 +9,4 @@ export class FixtureClass {
 
     @Inject()
     public dep2?: FixtureDependency;
-
-    @InjectArgs()
-    public test(dep3?: FixtureDependency): FixtureDependency {
-        return dep3 as FixtureDependency;
-    }
 }
