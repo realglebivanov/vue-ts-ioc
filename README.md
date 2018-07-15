@@ -6,9 +6,6 @@ VueJS bindings for IoC container and DI
 - vue-class-component
 - ts-ioc-di
 
-## Note
-Version from [github](https://github.com/glebivanov816/vue-class-component/tree/reflect-metadata-support-public) of `vue-class-component` is being used here, 'cause `vue-class-component` [doesnt support metadata forwarding](https://github.com/vuejs/vue-class-component/pull/227) which is required for this feature to work properly.
-
 ## Simple setup
 ```
 import Vue from 'vue';
@@ -54,8 +51,7 @@ new Application({
  container: container
 });
 ```
-## Fully configured setup
-Idea of Service Providers is the same as in [Laravel](https://laravel.com/).
+## Service providers setup
 They are used to bind dependencies to container in two phases - registration and booting.
 In first phase you should not resolve any dependencies from container since they may have not been registered.
 In second phase you can resolve those dependencies and register another dependencies using them.
@@ -85,9 +81,8 @@ new Application({
 });
 ```
 
-## Finally, usage of DI
-All [features](https://github.com/glebivanov816/ts-ioc-di) are available. 
-Your components should be `Autowired` classes for DI to work here.
+## Usage
+All [features](https://npmjs.com/package/ts-ioc-di) except constructor injection are available. 
 ```
 // Somewhere in one of your components
 import { Service } from 'somewhere';
@@ -95,7 +90,6 @@ import { Inject, InjectArgs, Autowired } from 'vue-ts-ioc';
 
 import Component from 'vue-class-component';
 
-@Autowired()
 @Component
 class TestComponent extends Vue {
   @Inject()

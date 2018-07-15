@@ -5,8 +5,7 @@ module.exports = {
 
     ts: {
         srcDir: resolve('src', 'ts'),
-        buildDir: resolve('build'),
-        specDir: resolve('spec', 'ts')
+        buildDir: resolve('build')
     },
 
     spec: {

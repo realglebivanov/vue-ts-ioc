@@ -11,8 +11,8 @@ import {
 
 Vue.use(Plugin);
 
-describe(Application.name, function () {
-    it('workds with Application as a mixin', function () {
+describe('Application', function () {
+    it('works with Application as a mixin', function () {
         const application: Vue = new Vue({ mixins: [Application] });
         const component: FixtureComponent = new FixtureComponent({ parent: application });
 

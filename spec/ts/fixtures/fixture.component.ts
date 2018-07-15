@@ -1,10 +1,9 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 
-import { Inject, InjectArgs, Autowired } from '@/index';
+import { Inject, InjectArgs } from '@/index';
 import { FixtureClass } from './fixture.class';
 
-@Autowired()
 @Component
 export class FixtureComponent extends Vue {
     public dep2?: FixtureClass;

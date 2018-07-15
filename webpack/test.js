@@ -13,11 +13,10 @@ module.exports = (paths) => ({
     },
 
     module: {
-        rules: [{
-            test: [/\.ts$/],
-            loader: 'ts-loader',
-            include: [paths.spec.srcDir],
-            options: { compilerOptions: { declaration: false } }
-        }]
+      rules: [{
+          test: [/\.ts$/],
+          loader: 'ts-loader',
+          include: [paths.spec.srcDir]
+      }]
     }
 });
