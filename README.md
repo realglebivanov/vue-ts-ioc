@@ -51,7 +51,45 @@ new Application({
  container: container
 });
 ```
-## Service providers setup
+
+## Setup with a dedicated component
+
+You can use one of your components just for container initialization
+```
+import Vue from 'vue';
+import Component from 'vue-class-component';
+
+import { Service, AnotherService } from 'somewhere';
+
+@Component
+
+export class ContainerInitialization extends Vue {
+  public beforeCreate(): void {
+    this.$container.singleton(Service);
+  }
+  
+  public created(): void {
+    this.$container.bindFactory(
+      AnotherService, 
+      (container: Container) => container.resolve(Service)
+    );
+  }
+}
+
+//  And then use it as a mixin in a root component
+
+import Vue from 'vue';
+import { Application, Plugin } from 'vue-ts-ioc';
+
+Vue.use(Plugin);
+
+new Application({
+  mixins: [ContainerInitialization]
+ // Vue componentOptions here
+});
+```
+
+## Setup with service providers
 They are used to bind dependencies to container in two phases - registration and booting.
 In first phase you should not resolve any dependencies from container since they may have not been registered.
 In second phase you can resolve those dependencies and register another dependencies using them.
@@ -86,7 +124,7 @@ All [features](https://npmjs.com/package/ts-ioc-di) except constructor injection
 ```
 // Somewhere in one of your components
 import { Service } from 'somewhere';
-import { Inject, InjectArgs, Autowired } from 'vue-ts-ioc';
+import { Inject, InjectArgs } from 'vue-ts-ioc';
 
 import Component from 'vue-class-component';
 
