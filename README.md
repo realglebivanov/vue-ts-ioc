@@ -1,5 +1,6 @@
 # vue-ts-ioc
 VueJS bindings for IoC container and DI
+[![CircleCI](https://circleci.com/gh/glebivanov816/vue-ts-ioc.svg?style=svg)](https://circleci.com/gh/glebivanov816/vue-ts-ioc)
 
 ## Dependencies
 - vue
