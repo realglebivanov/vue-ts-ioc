@@ -10,34 +10,20 @@ VueJS bindings for IoC container and DI
 ## Simple setup
 ```
 import Vue from 'vue';
-import { Application, Plugin } from 'vue-ts-ioc';
-
-Vue.use(Plugin);
-
-new Application({
- // Vue componentOptions here
-});
-```
-
-If you don't want to instantiate `Application` from package, you can use it as a mixin in your root component.
-There is only `beforeCreate` hook in it.
-
-```
-import Vue from 'vue';
-import { Application, Plugin } from 'vue-ts-ioc';
+import { Plugin } from 'vue-ts-ioc';
 
 Vue.use(Plugin);
 
 new Vue({
-  mixins: [Application]
  // Vue componentOptions here
 });
 ```
 
+
 ## Setup with manually instantiated container
 ```
 import Vue from 'vue';
-import { Application, Plugin, Container } from 'vue-ts-ioc';
+import { Plugin, Container } from 'vue-ts-ioc';
 
 Vue.use(Plugin);
 
@@ -47,7 +33,7 @@ const container = new Container();
 
 // bind things to container
 
-new Application({
+new Vue({
  // Vue componentOptions here,
  container: container
 });
@@ -66,10 +52,8 @@ import { Service, AnotherService } from 'somewhere';
 
 export class ContainerInitialization extends Vue {
   public beforeCreate(): void {
+    this.$container.alias(AnotherService, Service);
     this.$container.singleton(Service);
-  }
-  
-  public created(): void {
     this.$container.bindFactory(
       AnotherService, 
       (container: Container) => container.resolve(Service)
@@ -80,11 +64,11 @@ export class ContainerInitialization extends Vue {
 //  And then use it as a mixin in a root component
 
 import Vue from 'vue';
-import { Application, Plugin } from 'vue-ts-ioc';
+import { Plugin } from 'vue-ts-ioc';
 
 Vue.use(Plugin);
 
-new Application({
+new Vue({
   mixins: [ContainerInitialization]
  // Vue componentOptions here
 });
@@ -94,6 +78,22 @@ new Application({
 They are used to bind dependencies to container in two phases - registration and booting.
 In first phase you should not resolve any dependencies from container since they may have not been registered.
 In second phase you can resolve those dependencies and register another dependencies using them.
+
+If you don't want to instantiate `Application` from package, you can use it as a mixin in your root component.
+There is only `beforeCreate` hook in it.
+
+```
+import Vue from 'vue';
+import { Plugin } from 'vue-ts-ioc';
+
+Vue.use(Plugin);
+
+new Vue({
+  mixins: [Application]
+ // Vue componentOptions here
+});
+```
+
 ```
 import Vue from 'vue';
 import { Application, Plugin, Configuration, Provider } from 'vue-ts-ioc';
@@ -116,7 +116,7 @@ class ServiceProvider implements Provider {
 
 new Application({
  // Vue componentOptions here,
- iocConfig: new Configuration(ServiceProvider)
+ iocConfig: new Configuration(ServiceProvider, AnotherServiceProvider, ...)
 });
 ```
 
